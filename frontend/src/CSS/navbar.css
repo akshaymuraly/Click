@@ -1,0 +1,41 @@
+.navbar {
+    padding: 0;
+    margin: 0;
+    background-color: rgb(157, 221, 243);
+    height: 78px;
+}
+.navbar ul{
+    margin-top: 0;/*making it top */
+    display: flex;
+    list-style: none;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+        /* Center items horizontally */
+    height: 100%;
+        /* Center items vertically */
+}
+
+.navbar ul li{
+    padding: 16px;
+}
+
+.no-link-property{
+    border-radius: 10px;
+    text-decoration: none;
+    transition: color 0.3s, background-color 0.3s, font-size 0.3s;
+}
+.no-link-property:hover {
+    border-radius: 10px;
+    font-size: 1.2em;
+    text-decoration: underline;
+    text-decoration-color: rgb(16, 52, 52);
+}
+.navbar img{
+    width: 200px;
+    height: 200px;
+    color: antiquewhite;
+}
+
+
+

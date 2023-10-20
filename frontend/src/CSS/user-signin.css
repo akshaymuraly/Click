@@ -1,0 +1,73 @@
+.signinpage{
+    display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* Optional: horizontally center the form */
+        justify-content: center;
+        margin-top: 100px;
+}
+.signinpage form {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: black;
+    /* height: 200px;*/
+    width: 314px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Center the form items */
+    gap: 10px;
+    /* Add spacing between form items */
+}
+.signinpage input{
+    border-radius: 10px;
+    transition: width 0.2s;
+}
+.signinpage input:focus {
+    width: 200px;
+}
+.signinpage label {
+    border-radius: 10px;
+    font-size: 1rem;
+    letter-spacing: 3px;
+    color: blanchedalmond;
+    font-weight: bold;
+}
+
+.signinpage button{
+    width: 100px;
+    outline: none;
+    border-radius: 10px;
+    letter-spacing: 3px;
+    font-size: 1rem;
+    margin-top: 5px;
+    border: none;
+    padding: 5px;
+    transition: background-color width 0.2s;
+}
+.signinpage button:hover{
+    cursor: pointer;
+    background-color:rgb(53, 52, 52) ;
+    color: aliceblue;
+    width: 105px;
+}
+.signinpage span{
+    color: aliceblue;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 21px;
+}
+.signinpage-link{
+    text-decoration: none;
+    color: blueviolet;
+    transition:font-size 0.3s;
+    margin-top: 17px;
+}
+.signinpage-link:hover {
+    font-size: 1.3rem;
+    /* text-decoration: underline; */
+}
+.signinpage span:hover {
+    font-size: 1.2rem;
+    transition: font-size 0.3s;
+}

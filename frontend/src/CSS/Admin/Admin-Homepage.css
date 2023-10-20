@@ -1,0 +1,60 @@
+/* .admin-homepage{
+    display: flex;
+} */
+
+.admin-homepage ul {
+    margin-top: 10px;
+    width: 16%;
+    padding: 0;
+    position: absolute;
+    height: 100%;
+    left: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    /* justify-content: center; */
+    align-items: center;
+    background-color: black;
+    color: aliceblue;
+    text-align: center;
+}
+
+.admin-homepage li {
+    width: 100%;
+    /* Set the width to 100% to fill the ul's width */
+    padding: 5px;
+    /* Add some padding for spacing */
+}
+
+.admin-homepage li:not(:last-child) {
+    margin-bottom: 5px;
+    /* Add margin to the bottom of all li elements except the last one */
+}
+
+.admin-homepage li {
+    background-color: aliceblue;
+    color: black;
+    padding: 10px;
+    width: 90%;
+    border-radius: 10px;
+    position: relative;
+    left: 0;
+}
+.admin-homepage button{
+    background-color: brown;
+    color: aliceblue;
+    border-radius: 50px;
+}
+.admin-homepage button:hover {
+    background-color: rgb(131, 45, 45);
+    color: aliceblue;
+    cursor: pointer;
+}
+.admin-homepage-no-link{
+text-decoration: none;
+}
+.admin-homepage-no-link:hover {
+    cursor: pointer;
+    font-size: 1.2rem;
+}
