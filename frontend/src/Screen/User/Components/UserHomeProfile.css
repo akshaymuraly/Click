@@ -4,7 +4,7 @@
 }
 .uhp-container{
     background-color: aliceblue;
-    height: 100vh;
+    height: 89vh;
     display: flex;
     justify-content: center;
     width: 100%;
@@ -46,6 +46,7 @@
 .form-table {
     border-collapse: separate;
     border-spacing: 15px;
+    width: 100%;
     /* Adjust the value to set the gap size */
 }
 

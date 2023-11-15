@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./UserHomeProfile.css";
 import profile from "../../../assets/profilelogo.png";
 import axios from "axios";
@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../../../Store";
 import Message from "../../../Components/Messages";
+axios.defaults.withCredentials = true;
 
 const UserHomeProfile = () => {
   const array = ["name", "email", "password", "phone", "dob", "address"];
@@ -21,6 +22,25 @@ const UserHomeProfile = () => {
     dob: "",
     address: "",
   });
+  useEffect(() => {
+    async function getdetails() {
+      try {
+        dispatch(userActions.userStartLoading());
+        const res = await axios.get("/user/userdetails", {
+          withCredentials: true,
+        });
+        dispatch(userActions.userStopLoading());
+        setMessage(res.data.message);
+        setIsMessageVisible(true);
+        if (res.data.status) {
+          setInputs(res.data.user);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    getdetails();
+  }, []);
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -66,6 +86,7 @@ const UserHomeProfile = () => {
                           ? field
                           : "text"
                       }
+                      value={inputs[field]}
                       onChange={(e) => onchangehandler(e)}
                       required
                     />
