@@ -1,12 +1,13 @@
-import Navbar from "../Components/Navbar";
 import "../CSS/home-content.css";
+import HeaderSection from "../Components/Header";
+import LandingPageMainBody from "../Components/landinpage-main-body";
 
 function Home() {
   return (
-    <section>
-      <Navbar />
-      <p>This will be the home/landing page</p>
-    </section>
+    <>
+      <HeaderSection />
+      <LandingPageMainBody />
+    </>
   );
 }
 

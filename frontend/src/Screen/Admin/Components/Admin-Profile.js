@@ -8,6 +8,8 @@ axios.defaults.withCredentials = true;
 // import { userActions } from "../../Store";
 
 export function Profile() {
+  const [message, setMessage] = useState(null);
+  let axiosinstance = axios.create({ withCredentials: true });
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -16,35 +18,43 @@ export function Profile() {
   useEffect(() => {
     async function getdata() {
       try {
-        const res = await axios.get("http://localhost:5000/admin/details", {
-          withCredentials: true,
-        });
-        console.log(res.data);
+        const res = await axiosinstance.get("/admin/details");
+        console.log(res.data.user);
         if (res.data.status) {
+          console.log(res.data);
           setData(res.data.user);
+          // setMessage(res.data.message);
+          return;
         }
+        // setMessage(res.data.message);
       } catch (err) {
         console.log(err);
       }
     }
     getdata();
   }, []);
-  const onsubmithandler = (e) => {
+  const onsubmithandler = async (e) => {
     e.preventDefault();
     try {
-      const res = axios.post("", {
+      const res = await axios.put(`/admin/${data._id}`, {
         name: data.name,
         email: data.email,
         password: data.password,
       });
+      if (res.data.status) {
+        console.log(res.data);
+        setMessage(res.data.message);
+        return;
+      }
+      setMessage(res.data.message);
     } catch (err) {
       console.log(err);
     }
   };
+  console.log(message);
   function onchangehandler(e) {
     setData({ ...data, [e.target.id]: e.target.value });
   }
-  console.log(data);
   return (
     <div className="signinpage">
       <form onSubmit={onsubmithandler}>
@@ -62,16 +72,9 @@ export function Profile() {
           value={data.email}
           onChange={(e) => onchangehandler(e)}
         />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          value={data.password}
-          onChange={(e) => onchangehandler(e)}
-        />
-        <button type="submit">Signup</button>
+        <button type="submit">Update</button>
       </form>
-      <Message />
+      {message && <Message value={message} />}
     </div>
   );
 }

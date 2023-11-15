@@ -1,6 +1,7 @@
 const Admin = require("../Models/Admin");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const Doctor = require("../Models/Doctor");
 
 const adminSignup = async (req, res, next) => {
   const { name, email, password } = req.body;
@@ -64,7 +65,7 @@ const adminLogin = async (req, res, next) => {
     const token = await jwt.sign({ id: admin._id }, "Thiswillbethekey", {
       expiresIn: "1d",
     });
-    await res.cookie("authtoken", token, {
+    res.cookie("authtoken", token, {
       path: "/",
       expires: new Date(Date.now() + 1000 * 600), // 600 seconds
       httpOnly: true,
@@ -104,7 +105,7 @@ const getAdmin = async (req, res, next) => {
   const userId = req.id;
   let user;
   try {
-    user = await Admin.findById(userId).select("-_id -password");
+    user = await Admin.findById(userId).select("-password");
   } catch (err) {
     return res
       .status(500)
@@ -125,10 +126,96 @@ const logout = (req, res) => {
   }
 };
 
+const updateuser = async (req, res) => {
+  const reqid = req.params.adminid;
+  userid = req.id; //coming from cookie validating
+  if (reqid !== userid) {
+    return res.json({
+      status: false,
+      message: "You can not update other's data!",
+    });
+  }
+  const { name, email } = req.body;
+  console.log(userid, reqid);
+  try {
+    const updateduser = await Admin.findByIdAndUpdate(
+      { _id: userid },
+      { name, email },
+      { new: true }
+    );
+    if (!updateduser) {
+      return res.json({ message: "some error", status: false });
+    }
+    return res.json({
+      updateduser,
+      status: true,
+      message: "Data being update succefully! ",
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const getDoctors = async (req, res, next) => {
+  try {
+    const doctorsList = await Doctor.find({});
+    if (doctorsList.length !== 0) {
+      console.log(typeof doctorsList);
+      return res.json({
+        message: "Successfully fetched!",
+        doctorsList,
+        status: true,
+      });
+    }
+    return res.json({ status: false, message: "Empty list!" });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const updateDoctorStatus = async (req, res, next) => {
+  const doctorId = req.params.doctorid;
+
+  try {
+    // Fetch the doctor from the database
+    const doctor = await Doctor.findById(doctorId);
+
+    if (!doctor) {
+      return res.json({ status: false, message: "Doctor not found" });
+    }
+
+    // Negate the admin_permission value
+    doctor.admin_permission = !doctor.admin_permission;
+
+    // Save the updated doctor document
+    const updatedDoctor = await doctor.save();
+
+    return res.json({ status: true, message: "Updated", updatedDoctor });
+  } catch (error) {
+    // Handle any errors (e.g., database errors)
+    console.log(error);
+  }
+};
+
+const popularDoctors = async (req, res, next) => {
+  const page = req.query.page || 1;
+  const limit = req.query.limit || 5;
+  const doctorsList = await Doctor.find({}); //.limit(parseInt(limit));
+  const firstIndex = (page - 1) * limit; //5
+  const lastIndex = page * limit; //10
+  const result = doctorsList.slice(firstIndex, lastIndex); //5,10
+  const total = doctorsList.length;
+  return res.json({ result, total });
+};
+
 module.exports = {
   adminSignup,
   adminLogin,
   cookievalidate,
   getAdmin,
   logout,
+  updateuser,
+  getDoctors,
+  updateDoctorStatus,
+  popularDoctors,
 };

@@ -1,0 +1,32 @@
+.message-container{
+    /* width: 200px;
+    height: 200px;*/
+    bottom: 58px;
+    position: absolute;
+    background-color:rgb(21 38 52);
+    color: aliceblue;
+    /* padding: 10px; */
+}
+.message-container>p{
+    padding: 10px;
+}
+.message-close-btn{
+top:0;
+right: 0;
+position: absolute;
+background:none;
+cursor: pointer;
+color: aliceblue;
+border: none;
+}
+.msg-btn{
+    color: aliceblue;
+}
+.message-login{
+    text-decoration: none;
+    color: blueviolet;
+    transition: all 0.37s ease-in;
+}
+.message-login:hover{
+    color: rgb(167, 98, 233);
+}

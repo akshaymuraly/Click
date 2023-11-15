@@ -4,11 +4,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { userActions } from "../../Store";
+import { adminActions } from "../../Store";
 
 function AdminSignIn() {
   const [message, setMessage] = useState(null);
-  const loading = useSelector((state) => state.user.loading);
+  const loading = useSelector((state) => state.admin.loading);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [data, setData] = useState({
@@ -18,25 +18,25 @@ function AdminSignIn() {
   const onsubmithandler = async (e) => {
     e.preventDefault();
     try {
-      dispatch(userActions.startloading());
+      dispatch(adminActions.adminStartLoading());
       const res = await axios.post(
-        "http://127.0.0.1:5000/admin/signin",
+        "/admin/signin",
         {
           email: data.email,
           password: data.password,
         },
         { withCredentials: true }
       );
-      dispatch(userActions.stoploading());
+      dispatch(adminActions.adminStopLoading());
       if (res.data.status) {
-        dispatch(userActions.login());
+        dispatch(adminActions.adminLogin());
         navigate("/adminhomepage");
         return;
       }
       setMessage(res.data.message);
       console.log(res.data.status);
     } catch (err) {
-      dispatch(userActions.stoploading());
+      dispatch(adminActions.adminStopLoading());
       console.log(err);
     }
   };

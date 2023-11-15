@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { userActions } from "../../Store";
+import { adminActions } from "../../Store";
 import { useDispatch } from "react-redux";
 import "../../CSS/Admin/Admin-Homepage.css";
 import "../../CSS/Admin/Admin-Homepage-content.css";
@@ -24,11 +24,11 @@ export default function AdminHome() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   async function onsubmithandler(e) {
-    const res = await axios.get("http://127.0.0.1:5000/admin/logout", {
+    const res = await axios.get("/admin/logout", {
       withCredentials: true,
     });
     if (res.data.status) {
-      dispatch(userActions.logout());
+      dispatch(adminActions.adminLogout());
       navigate("/");
       return;
     }
@@ -39,21 +39,32 @@ export default function AdminHome() {
       <section className="admin-homepage">
         <nav>
           <ul>
-            <button
-              className="admin-homepage-no-link"
-              onClick={() => navigate("profile")}
-            >
-              <li>
+            <li>
+              <a
+                className="admin-homepage-button"
+                onClick={() => navigate("profile")}
+              >
                 <CgProfile /> Profile
-              </li>
-            </button>
-            <li>Services</li>
+              </a>
+            </li>
+            <li>
+              <a>Services</a>
+            </li>
             <li>Requests</li>
             <li>List of users</li>
-            <li>List of doctors</li>
+            <li>
+              <a
+                className="admin-homepage-button"
+                onClick={() => navigate("doctors")}
+              >
+                List of doctors
+              </a>
+            </li>
             <li>
               <form onSubmit={() => onsubmithandler()}>
-                <button type="submit">Signout</button>
+                <button className="admin-homepage-button" type="submit">
+                  Signout
+                </button>
               </form>
             </li>
           </ul>

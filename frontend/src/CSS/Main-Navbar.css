@@ -1,0 +1,148 @@
+.link {
+    text-decoration: none;
+}
+.nav-header {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: rgb(44, 5, 81);
+}
+.nav-header>.nav-logo{
+    color: aliceblue;
+}
+
+.nav-ul {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    list-style: none;
+    margin-right: 10px;
+}
+
+.nav-ul>li {
+    position: relative;
+    margin: 0 20px;
+    transition: all 0.3s ease;
+    font-weight: 400;
+}
+.nav-ul>li>.link{
+    color: rgb(22, 153, 153);
+}
+.nav-ul>li>.link:hover {
+color: rgb(105, 108, 108);
+}
+
+.nav-ul>li::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 1px;
+    background-color: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: width 0.3s ease;
+}
+
+.nav-ul > li:hover::after {
+    width: 100%;
+    /* Expand the line on hover */
+}
+
+.nav-ul > li:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+.hamburger-button{
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border-radius: 4px;
+    border: none;
+    color: aliceblue;
+}
+.hamburger-button .hamburger-symbol{
+height: 28px;
+    width: 28px;
+}
+.hamburger-button:hover{
+    cursor: pointer;
+}
+/* More */
+.more {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.more:hover>.drop-down-menu {
+    display: block;
+}
+/* Mobile navbar CSS */
+.ul-mobile{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(5, 79, 106);
+    position: absolute;
+    border-radius: 0 10px 10px 0;
+    height: 30%;
+    width: 30%;
+    /* justify-content: center; */
+    align-items: center;
+}
+.ul-mobile>li {
+    position: relative;
+    /* margin: 0 20px; */
+    transition: all 0.3s ease;
+    font-weight: 400;
+    width: 100%;
+    padding: 2px;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+.ul-mobile>li>.link {
+    color: rgb(22, 153, 153);
+}
+
+.ul-mobile>li>.link:hover {
+    color: rgb(105, 108, 108);
+}
+
+.ul-mobile>li::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 1px;
+    background-color: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: width 0.3s ease;
+}
+
+.ul-mobile>li:hover::after {
+    width: 90%;
+    /* Expand the line on hover */
+}
+
+.ul-mobile>li:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+/* MEDIA QUERY */
+@media (max-width:800px) {
+    .nav-ul{
+        display: none;
+    }
+    .nav-header{
+        justify-content: space-between;
+        flex-direction: row-reverse;
+    }
+    .hamburger-button{
+        display: flex;
+    }
+}

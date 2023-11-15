@@ -35,26 +35,23 @@
 .admin-homepage li {
     background-color: aliceblue;
     color: black;
-    padding: 10px;
     width: 90%;
     border-radius: 10px;
-    position: relative;
+    /* position: relative; */
     left: 0;
+    transition: all 0.3 ease-in;
 }
-.admin-homepage button{
-    background-color: brown;
-    color: aliceblue;
-    border-radius: 50px;
+.admin-homepage-button{
+    width: 100%;
+    height: 100%;
+    border: none;
 }
-.admin-homepage button:hover {
-    background-color: rgb(131, 45, 45);
+.admin-homepage li:hover{
+    font-size: 1.3rem;
+    background-color: rgb(143, 135, 125);
     color: aliceblue;
     cursor: pointer;
 }
-.admin-homepage-no-link{
-text-decoration: none;
-}
-.admin-homepage-no-link:hover {
-    cursor: pointer;
-    font-size: 1.2rem;
-}
+/* .admin-homepage-button:hover {0
+    
+} */

@@ -1,6 +1,20 @@
 import "../CSS/message.css";
-function Message({ value }) {
-  return <div className="message-success">{value}</div>;
+import { AiOutlineClose } from "react-icons/ai";
+function Message({ value, setIsMessageVisible }) {
+  return (
+    <>
+      {" "}
+      <div className="message-success">
+        {value}
+        <button
+          className="msg-cls-btn"
+          onClick={() => setIsMessageVisible(false)}
+        >
+          <AiOutlineClose />
+        </button>
+      </div>
+    </>
+  );
 }
 
 export default Message;

@@ -2,22 +2,22 @@
     padding-left: 5px;
     padding-right: 5px;
     display: flex;
-    top: 10px;
-        position: relative;
-    top: 50px;
-        background-color: aquamarine;
-        color: #21394f;
+    bottom: 60px;
+        position: absolute;
+    /* top: 50px; */
+        background-color: rgba(241, 49, 11, 0.392);
+        color: #fbfcfd;
         font-weight: bold;
         font-size: 1rem;
         letter-spacing: 5px;
         border-radius: 5px;
-        border-color: black;
-        height: 67px;
+        border: 1px solid rgb(245 26 26);
+        height: 50px;
         font-family: math;
         align-items: center;
         justify-content: center;
-        width: 394px;
-        text-shadow: -1px 1px 2px black;
+        max-width: 394px;
+        /* text-shadow: -1px 1px 2px black; */
     
 }
 .message-failer {
@@ -38,4 +38,13 @@
     width: 394px;
     text-shadow: 2px 2px 4px black;
 
+}
+.msg-cls-btn{
+    border: 1px solid #f85149;
+    background: none;
+    color: aliceblue;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

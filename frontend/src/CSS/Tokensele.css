@@ -1,0 +1,96 @@
+/* Font import */
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Montserrat:wght@800&family=Poppins:wght@300&family=Roboto:wght@700&display=swap');
+
+/* Main */
+
+.seat-selection-container{
+    background-color: aliceblue;
+    display: flex;
+    height: 100vh;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.seat-grid{
+    display: flex;
+    flex-direction: column;
+}
+.seat-row{
+    display: flex;
+    color: rgb(50, 48, 48);
+}
+.token{
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    margin: 5px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.token:hover{
+    border:1px solid rgb(37, 36, 36);
+}
+.section-one>h2{
+    text-align: center;
+    margin-bottom: 10px;
+}
+.section-one p{
+    margin-top: 10px;
+}
+.selected{
+    background-color: rgb(4, 212, 143);
+}
+.section-two-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Form section */
+.section-two-form .doctor-detailsan{
+color: gray;
+font-family: "Roboto";
+margin-left: 10px;
+}
+.heading-booking{
+    text-align: center;
+    margin:30px 0;
+    position: relative;
+}
+.heading-booking:after{
+content: "";
+display: block;
+height: .9px;
+width: 100%;
+background-color: gray;
+position: absolute;
+margin-top: 10px;
+}
+.book-button{
+    font-family: 'Roboto', sans-serif;
+    background-color: rgb(248, 68, 100);
+    color: aliceblue;
+    border-radius: 10px;
+    padding:5px 30px;
+    border: 1px solid rgb(198, 4, 59);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.book-button:hover{
+    /* transform: scale(1.01); */
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    background-color: rgb(198, 4, 59);
+}
+.book-button-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
