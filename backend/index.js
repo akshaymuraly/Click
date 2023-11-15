@@ -2,9 +2,14 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
+require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const adminRoutes = require("./Routes/AdminRoutes");
 const userRoutes = require("./Routes/UserRoutes");
+
+// ENV variables
+const DB = process.env.DB_LINK;
+
 // app.use(function (req, res, next) {
 //   res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
 //   res.header(
@@ -15,7 +20,7 @@ const userRoutes = require("./Routes/UserRoutes");
 // });
 
 try {
-  mongoose.connect("mongodb://127.0.0.1:27017/click", {
+  mongoose.connect(DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
