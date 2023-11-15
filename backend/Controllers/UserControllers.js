@@ -123,7 +123,9 @@ const getUser = async (req, res, next) => {
   if (!user) {
     return res.status(404).json({ messsage: "User Not Found", status: false });
   }
-  return res.status(200).json({ user, status: true });
+  return res
+    .status(200)
+    .json({ user, status: true, message: "Data fetched successfully!" });
 };
 
 module.exports = {
