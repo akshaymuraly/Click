@@ -9,7 +9,7 @@ import Message from "../../../Components/Messages";
 axios.defaults.withCredentials = true;
 
 const UserHomeProfile = () => {
-  const array = ["name", "email", "password", "phone", "dob", "address"];
+  const array = ["name", "email", "phone", "dob", "address"];
   const [isMessageVisible, setIsMessageVisible] = useState(false);
   const [message, setMessage] = useState(null);
   const dispatch = useDispatch();
@@ -45,10 +45,9 @@ const UserHomeProfile = () => {
     e.preventDefault();
     try {
       dispatch(userActions.userStartLoading());
-      const res = await axios.post("/user/signup", {
+      const res = await axios.put(`/user/${inputs._id}`, {
         name: inputs.name,
         email: inputs.email,
-        password: inputs.password,
         phone: inputs.phone,
         dob: inputs.dob,
         address: inputs.address,
@@ -96,7 +95,7 @@ const UserHomeProfile = () => {
             </tbody>
           </table>
           <button type="submit" className={"form-bt-submit"}>
-            {isLoading ? "loading..." : "Submit"}
+            {isLoading ? "loading..." : "Update"}
           </button>
           {isMessageVisible && (
             <Message

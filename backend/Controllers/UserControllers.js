@@ -2,6 +2,7 @@ const Doctor = require("../Models/Doctor");
 const User = require("../Models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const Booking = require("../Models/Bookings");
 
 const DoctorDetails = async (req, res, next) => {
   const id = req.params.id;
@@ -128,10 +129,114 @@ const getUser = async (req, res, next) => {
     .json({ user, status: true, message: "Data fetched successfully!" });
 };
 
+const editUser = async (req, res, next) => {
+  const userId = req.params.userid;
+  if (req.id !== userId) {
+    return res.json({ message: "You can not edit other's data" });
+  }
+  const { name, email, phone, address, dob } = req.body;
+  if (
+    name === "" ||
+    email === "" ||
+    phone === "" ||
+    address === "" ||
+    dob === ""
+  )
+    return res.json({ status: false, message: "Fields can not be empty!" });
+
+  try {
+    const updateduser = await User.findByIdAndUpdate(
+      { _id: req.id },
+      { name, email, phone, address, dob },
+      { new: true }
+    );
+    if (!updateduser) {
+      return res.json({ message: "some error", status: false });
+    }
+    return res.json({
+      updateduser,
+      status: true,
+      message: "Data being update succefully! ",
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const searchDoctor = async (req, res, next) => {
+  const searchTerm = req.query.searchTerm || "";
+  const query = {
+    name: {
+      $regex: searchTerm,
+      $options: "i",
+    },
+  };
+  try {
+    const doctor = await Doctor.find(query);
+    return res.json({ status: true, message: "Retreived", doctor });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const bookDoctor = async (req, res, next) => {
+  const doctorId = req.params.doctorid;
+  const userId = req.id;
+  const { name, address, phone, email, dob, age, date, token } =
+    req.body.userDetails;
+  if (
+    !name ||
+    !email ||
+    !phone ||
+    !age ||
+    !address ||
+    !date ||
+    !token ||
+    name === "" ||
+    email === "" ||
+    phone === "" ||
+    age === "" ||
+    address === "" ||
+    date === "" ||
+    token === ""
+  ) {
+    return res.json({ status: false, message: "No fields can be empty!" });
+  }
+  try {
+    const booking = new Booking({
+      doctor: {
+        id: doctorId,
+        // name: doctorname,
+      },
+      bookedby: {
+        id: userId,
+      },
+      name,
+      email,
+      phone,
+      age,
+      address,
+      date,
+      token,
+    });
+    await booking.save();
+    if (booking) {
+      return res.json({ message: "Booked!", status: true, booking });
+    }
+    return res.json({ message: "Unable to book!", status: false });
+  } catch (err) {
+    console.log(err);
+    return res.json({ status: false, message: "Unable to connect DB!" });
+  }
+};
+
 module.exports = {
   DoctorDetails,
   userSignUp,
   userLogin,
   cookievalidate,
   getUser,
+  editUser,
+  searchDoctor,
+  bookDoctor,
 };

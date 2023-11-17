@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { UseSelector, useDispatch, useSelector } from "react-redux";
 import { userActions } from "../Store";
 import axios from "axios";
+axios.defaults.withCredentials = true;
 // import "./SeatSelection.css";
 
 const SeatSelection = () => {
@@ -16,7 +17,28 @@ const SeatSelection = () => {
   const rows = 10;
   const seatsPerRow = totalSeats / rows;
   const [doctorDetails, setDoctorDetails] = useState([]);
+  const [userDetails, setUserDetails] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+  });
+  const handleChange = (e) => {
+    setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
+  };
 
+  async function getUserDetails() {
+    try {
+      const res = await axios.get("/user/userdetails", {
+        withCredentials: true,
+      });
+      if (res.data.user) {
+        setUserDetails(res.data.user);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
   useEffect(() => {
     async function getDoctor() {
       const res = await axios.get(`/user/booking/${doctorId}`);
@@ -24,6 +46,9 @@ const SeatSelection = () => {
       console.log(res.data);
     }
     getDoctor();
+    if (isLoggedIn) {
+      getUserDetails();
+    }
   }, []);
 
   const [selectedSeats, setSelectedSeats] = useState([]);
@@ -32,11 +57,22 @@ const SeatSelection = () => {
     setSelectedSeats(seatNumber);
     console.log(selectedSeats);
   };
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
     if (!isLoggedIn) {
       setMessageVisible(true);
       return;
+    }
+    console.log(userDetails);
+    try {
+      const res = await axios.post(
+        `/user/book/${doctorId}`,
+        { userDetails },
+        { withCredentials: true }
+      );
+      console.log(res.data.message);
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -53,11 +89,15 @@ const SeatSelection = () => {
                 return (
                   <div
                     key={seatNumber}
+                    name="token"
                     className={`token ${
                       selectedSeats === seatNumber ? "selected" : ""
                     }`}
                     //   className={`seat ${isSelected ? "selected" : ""}`}
-                    onClick={() => handleSeatClick(seatNumber)}
+                    onClick={(e) => {
+                      handleSeatClick(seatNumber);
+                      setUserDetails({ ...userDetails, token: seatNumber });
+                    }}
                   >
                     {seatNumber}
                   </div>
@@ -107,37 +147,66 @@ const SeatSelection = () => {
               <tr>
                 <td>Name: </td>
                 <td>
-                  <input type="text" />
+                  <input
+                    type="text"
+                    value={userDetails.name}
+                    name="name"
+                    onChange={(e) => handleChange(e)}
+                  />
                 </td>
               </tr>
               <tr>
                 <td>Age: </td>
                 <td>
-                  <input type="text" />
+                  <input
+                    type="text"
+                    value={userDetails.age}
+                    name="age"
+                    onChange={(e) => handleChange(e)}
+                  />
                 </td>
               </tr>
               <tr>
                 <td>Address: </td>
                 <td>
-                  <input type="text" />
+                  <input
+                    type="text"
+                    value={userDetails.address}
+                    name="address"
+                    onChange={(e) => handleChange(e)}
+                  />
                 </td>
               </tr>
               <tr>
                 <td>Email: </td>
                 <td>
-                  <input type="text" />
+                  <input
+                    type="text"
+                    value={userDetails.email}
+                    name="email"
+                    onChange={(e) => handleChange(e)}
+                  />
                 </td>
               </tr>
               <tr>
                 <td>Phone: </td>
                 <td>
-                  <input type="text" />
+                  <input
+                    type="text"
+                    value={userDetails.phone}
+                    name="email"
+                    onChange={(e) => handleChange(e)}
+                  />
                 </td>
               </tr>
               <tr>
                 <td>Date: </td>
                 <td>
-                  <input type="date" />
+                  <input
+                    type="text"
+                    name="date"
+                    onChange={(e) => handleChange(e)}
+                  />
                 </td>
               </tr>
             </tbody>

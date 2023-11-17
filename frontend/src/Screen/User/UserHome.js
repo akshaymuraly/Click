@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
 import UserHomeNav from "./Components/UserHomeNav";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
+import UserHomeSearch from "./Components/UserHomeSearch";
+import axios from "axios";
 
 function UserHome() {
+  const [Default, setDefault] = useState(true);
+  const [query, setQuery] = useState("");
   return (
     <>
-      <UserHomeNav />
-      <Outlet />
+      <UserHomeNav setQuery={setQuery} Default={{ setDefault, Default }} />
+      {Default ? <UserHomeSearch query={query} /> : <Outlet />}
     </>
   );
 }

@@ -1,0 +1,24 @@
+.uhs-container{
+    background-color: aliceblue;
+    height:88vh;
+    display: flex;
+    justify-content: center;
+}
+.uhs-sub-container{
+    height: 100%;
+    width: 95%;
+    background-color: aqua;
+    padding: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: scroll;
+    justify-content: center;
+    align-items: center;
+}
+.uhs-items{
+    /* flex-grow: 1; */
+    width: 90%;
+    margin: 10px;
+    height:50px;
+    background-color: aliceblue;
+}

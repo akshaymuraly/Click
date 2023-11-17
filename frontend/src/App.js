@@ -14,6 +14,7 @@ import UserSignUp from "./Screen/User/UserSignUp";
 import UserSignIn from "./Screen/User/UserSignIn";
 import UserHome from "./Screen/User/UserHome";
 import UserHomeProfile from "./Screen/User/Components/UserHomeProfile";
+import UserHomeSearch from "./Screen/User/Components/UserHomeSearch";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route path="/usersignin" element={<UserSignIn />} />
         <Route path="/userhome" element={<UserHome />}>
           <Route path="userprofile" element={<UserHomeProfile />} />
+          <Route path="search" element={<UserHomeSearch />} />
         </Route>
       </Routes>
     </Router>

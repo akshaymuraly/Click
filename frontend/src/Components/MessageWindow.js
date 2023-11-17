@@ -18,9 +18,16 @@ export default function MessageWindow({ setMessageVisible }) {
         <p>
           You have to login to book!{" "}
           <span>
-            <Link className="message-login"> Login </Link> or{" "}
-            <Link className="message-login"> Signup </Link> if you don't have a
-            account yet!
+            <Link className="message-login" to="/usersignin">
+              {" "}
+              Login{" "}
+            </Link>{" "}
+            or{" "}
+            <Link className="message-login" to="/usersignup">
+              {" "}
+              Signup{" "}
+            </Link>{" "}
+            if you don't have a account yet!
           </span>
         </p>
         <button

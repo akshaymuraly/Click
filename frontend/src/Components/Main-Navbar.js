@@ -46,12 +46,12 @@ export default function MainNavbar() {
               </Link>
             </li>
             <li>
-              <Link to="/signup" className="link">
+              <Link to="/usersignup" className="link">
                 Sign Up
               </Link>
             </li>
             <li>
-              <Link to="/signin" className="link">
+              <Link to="/usersignin" className="link">
                 Sign In
               </Link>
             </li>
